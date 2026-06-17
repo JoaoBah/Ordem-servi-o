@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Ordem de Serviço - Movistar Logística</title>
+    <style>
+        /* Paleta de Cores baseada na Logo Movistar */
+        :root {
+            --movistar-blue: #0000FF;
+            --text-dark: #000000;
+            --text-muted: #555555;
+            --bg-screen: #f4f6fa;
+            --card-bg: #ffffff;
+            --border-color: #cccccc;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+
+        body { 
+            background-color: var(--bg-screen); 
+            color: var(--text-dark); 
+            padding: 40px 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        .container { 
+            background: var(--card-bg); 
+            width: 100%; 
+            max-width: 780px; 
+            padding: 45px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); 
+            border-top: 8px solid var(--movistar-blue); 
+        }
+
+        .header { 
+            text-align: center; 
+            margin-bottom: 35px; 
+            border-bottom: 2px solid #eef0f5; 
+            padding-bottom: 25px; 
+        }
+        
+        .logo-container {
+            max-width: 280px;
+            margin: 0 auto 15px auto;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .header h2 { 
+            color: var(--text-dark); 
+            font-size: 24px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Divisores Visuais para Encorpar a Tela */
+        .form-section {
+            background: #fafbfc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--movistar-blue);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .form-row { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
+
+        /* Linhas da frota estruturadas em grid dinâmico */
+        .frota-grid-tela {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group { 
+            margin-bottom: 15px; 
+        }
+
+        @media (max-width: 650px) {
+            .form-row, .frota-grid-tela { grid-template-columns: 1fr; gap: 0; }
+            .form-group { margin-bottom: 20px; }
+        }
+
+        label { 
+            font-size: 13px; 
+            font-weight: 700; 
+            color: #374151; 
+            display: block; 
+            margin-bottom: 8px; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input, textarea, select { 
+            width: 100%; 
+            padding: 14px 16px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 6px; 
+            font-size: 15px; 
+            background-color: #fff; 
+            color: var(--text-dark); 
+            transition: all 0.2s ease-in-out;
+        }
+
+        input:disabled {
+            background-color: #f3f4f6;
+            color: #000;
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+            cursor: not-allowed;
+        }
+        
+        input:focus, textarea:focus, select:focus { 
+            outline: none; 
+            border-color: var(--movistar-blue); 
+            box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.08); 
+        }
+
+        /* Container de Busca com Ícone e Botão + */
+        .search-input-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .search-input-container::before {
+            content: "🔍";
+            position: absolute;
+            left: 12px;
+            font-size: 14px;
+            color: #888;
+            pointer-events: none;
+        }
+
+        .search-input-container select {
+            padding-left: 36px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .btn-add-shortcut {
+            background-color: #f3f4f6;
+            color: #111827;
+            border: 1px solid var(--border-color);
+            border-left: none;
+            padding: 14px 16px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-add-shortcut:hover {
+            background-color: #e5e7eb;
+            color: var(--movistar-blue);
+        }
+
+        textarea { 
+            resize: vertical; 
+            min-height: 140px; 
+            line-height: 1.6; 
+        }
+
+        button[type="submit"] { 
+            background-color: var(--movistar-blue); 
+            color: white; 
+            padding: 18px 20px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 16px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            margin-top: 10px; 
+            letter-spacing: 1px;
+            transition: background-color 0.2s;
+        }
+        button[type="submit"]:hover { background-color: #0000cd; }
+
+        .print-header-layout, .print-grid, .print-textarea-lines, .signature-container, .footer-institutional { 
+            display: none; 
+        }
+
+        /* ==========================================================================
+           ESTRUTURA DE IMPRESSÃO INDUSTRIAL AVANÇADA (MANUTENÇÃO DE BLOCO)
+           ========================================================================== */
+        @media print {
+            body { background: white; padding: 0; margin: 0; display: block; min-height: auto; font-family: Arial, sans-serif; }
+            .container { max-width: 100%; box-shadow: none; padding: 0; border-top: none; }
+            
+            .header, #osForm, button { display: none !important; }
+
+            .print-header-layout {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border: 2px solid #000000;
+                padding: 15px;
+                margin-bottom: 25px;
+                background-color: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .print-logo-box { width: 40%; }
+            .print-logo-box img { width: 100%; height: auto; }
+            .print-title-box { width: 55%; text-align: right; }
+            .print-title-box h1 { font-size: 22px; text-transform: uppercase; font-weight: bold; color: #000; letter-spacing: 0.5px; }
+            .print-title-box p { font-size: 11px; font-weight: bold; margin-top: 4px; color: #333; }
+
+            .print-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 12px;
+            }
+            .print-block {
+                display: block !important;
+                border: 2px solid #000000;
+                padding: 8px 10px;
+                background: #ffffff;
+            }
+            .print-block.full-width {
+                grid-column: span 3;
+            }
+            .print-label {
+                font-size: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #000000;
+                border-bottom: 1px solid #000000;
+                padding-bottom: 2px;
+                margin-bottom: 4px;
+            }
+            .print-value {
+                font-size: 14px;
+                font-weight: bold;
+                color: #000000;
+                word-wrap: break-word;
+            }
+
+            .print-textarea-lines {
+                display: block !important;
+                border: 2px solid #000000;
+                padding: 12px;
+                margin-top: 15px;
+                margin-bottom: 25px;
+                min-height: 280px;
+                background: #ffffff;
+            }
+            .print-value-description {
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 1.6;
+                color: #000000;
+                white-space: pre-wrap;
+            }
+
+            .signature-container { 
+                display: flex !important; 
+                justify-content: space-between; 
+                align-items: flex-end;
+                margin-top: 70px; 
+                padding: 0 10px;
+            }
+            .signature-date-box { font-size: 13px; font-weight: bold; }
+            .signature-box { 
+                text-align: center; 
+                width: 320px; 
+                border-top: 2px solid #000000; 
+                padding-top: 6px; 
+                font-size: 14px; 
+                font-weight: bold;
+            }
+
+            .footer-institutional { 
+                display: block !important; 
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                text-align: center; 
+                border-top: 2px solid #000000; 
+                padding-top: 8px;
+                font-size: 11px;
+                font-weight: bold;
+                line-height: 1.4;
+                background-color: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="print-header-layout">
+        <div class="print-logo-box">
+            <img src="./img/LOGO MOVISTAR.png" alt="Movistar Logística">
+        </div>
+        <div class="print-title-box">
+            <h1>Ordem de Serviço</h1>
+            <p>SOLICITAÇÃO DE MANUTENÇÃO EXTERNA</p>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="logo-container">
+            <img src="./img/LOGO MOVISTAR.png" alt="Movistar Logística">
+        </div>
+        <h2>Ordem de Serviço de Manutenção</h2>
+    </div>
+    
+    <form id="osForm">
+        
+        <div class="form-section">
+            <div class="section-title">Identificação da Demanda</div>
+            
+            <div class="form-group">
+                <label for="dataSolicitacao">Data da Solicitação</label>
+                <input type="date" id="dataSolicitacao" required>
+            </div>
+
+            <div class="frota-grid-tela">
+                <div class="form-group">
+                    <label for="selectFrota">Frota / Prefixo</label>
+                    <div class="search-input-container">
+                        <select id="selectFrota" required>
+                            <option value="" disabled selected>Buscando...</option>
+                        </select>
+                        <button type="button" class="btn-add-shortcut" onclick="adicionarFrotaManual()" title="Cadastrar nova frota">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtPlaca">Placa Atribuída</label>
+                    <input type="text" id="txtPlaca" placeholder="Automático" disabled required>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtModelo">Modelo Veículo</label>
+                    <input type="text" id="txtModelo" placeholder="Automático" disabled required>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFilial">Filial Movistar</label>
+                    <input type="text" id="txtFilial" placeholder="Automático" disabled required>
+                </div>
+
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="txtCnpj">CNPJ da Frota</label>
+                    <input type="text" id="txtCnpj" placeholder="Automático" disabled required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-title">Direcionamento</div>
+            <div class="form-group">
+                <label for="empresaParceira">Oficina / Prestador de Serviço</label>
+                <div class="search-input-container">
+                    <select id="empresaParceira" required>
+                        <option value="" disabled selected>Buscando...</option>
+                    </select>
+                    <button type="button" class="btn-add-shortcut" onclick="adicionarOficinaManual()" title="Cadastrar nova oficina">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-title">Especificação Técnica</div>
+            <div class="form-group">
+                <label for="descricao">Descrição do Serviço Solicitado</label>
+                <textarea id="descricao" placeholder="Descreva de forma clara os problemas identificados, itens a serem revisados ou reparos específicos a serem executados no veículo..." required></textarea>
+            </div>
+        </div>
+
+        <button type="submit" id="btnSalvar">
+            <span>Salvar no Sistema e Imprimir OS</span>
+        </button>
+    </form>
+
+    <div class="print-grid">
+        <div class="print-block">
+            <div class="print-label">Data Solicitação</div>
+            <div class="print-value" id="printData"></div>
+        </div>
+        <div class="print-block">
+            <div class="print-label">Frota / Prefixo</div>
+            <div class="print-value" id="printFrota"></div>
+        </div>
+        <div class="print-block">
+            <div class="print-label">Placa</div>
+            <div class="print-value" id="printPlaca"></div>
+        </div>
+        <div class="print-block">
+            <div class="print-label">Modelo Veículo</div>
+            <div class="print-value" id="printModelo"></div>
+        </div>
+        <div class="print-block">
+            <div class="print-label">Filial Emissora</div>
+            <div class="print-value" id="printFilial"></div>
+        </div>
+        <div class="print-block">
+            <div class="print-label">CNPJ Empresa</div>
+            <div class="print-value" id="printCnpj"></div>
+        </div>
+        <div class="print-block full-width">
+            <div class="print-label">Oficina / Prestador de Serviço Destinado</div>
+            <div class="print-value" id="printOficina"></div>
+        </div>
+    </div>
+
+    <div class="print-textarea-lines">
+        <div class="print-label">Descrição do Serviço a Ser Executado</div>
+        <div class="print-value-description" id="printDescricao"></div>
+    </div>
+
+    <div class="signature-container">
+        <div class="signature-date-box" id="printDataCidade">
+            Cascavel - PR, ____ de _________________ de 2026.
+        </div>
+        <div class="signature-box">
+            MOVISTAR OPERAÇÕES LOGÍSTICAS
+        </div>
+    </div>
+
+    <div class="footer-institutional">
+        <strong>MOVISTAR OPERAÇÕES LOGÍSTICAS LTDA</strong><br>
+        AV BRASIL, 333 SALA 03 - PACAEMBU - CEP: 85816-302 - CASCAVEL - PR<br>
+        Fone: 45 2101-3077 | E-mail: transporte@destromacro.com.br
+    </div>
+</div>
+
+<script>
+    const URL_SALVAR = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/ordem-servico-caminhao";
+    const URL_FROTA = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/buscar-frotas";
+    const URL_OFICINAS = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/buscar-oficinas";
+    
+    const URL_CAD_FROTA = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/cadastrar-frota";
+    const URL_CAD_OFICINA = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/cadastrar-prestador";
+
+    let dicionarioFrotas = {};
+
+    async function carregarBancoDeDados() {
+        // Buscar Frotas
+        try {
+            const resFrota = await fetch(URL_FROTA);
+            if (resFrota.ok) {
+                let frotas = await resFrota.json();
+                if (!Array.isArray(frotas) && frotas.frotas) frotas = frotas.frotas;
+                if (!Array.isArray(frotas)) frotas = [frotas];
+
+                const selectFrota = document.getElementById('selectFrota');
+                selectFrota.innerHTML = '<option value="" disabled selected>Selecione a Frota...</option>';
+                
+                frotas.forEach(f => {
+                    const item = f.json || f;
+                    if(item.FROTA && item.PLACA) {
+                        // Armazena todas as variáveis do veículo indexadas pelo prefixo
+                        dicionarioFrotas[item.FROTA] = {
+                            placa: item.PLACA,
+                            modelo: item.MODELO || "NÃO INFORMADO",
+                            filial: item.FILIAL || "NÃO INFORMADO",
+                            cnpj: item.CNPJ || "NÃO INFORMADO"
+                        };
+                        let opt = document.createElement('option');
+                        opt.value = item.FROTA;
+                        opt.innerText = item.FROTA;
+                        selectFrota.appendChild(opt);
+                    }
+                });
+            }
+        } catch (e) { console.error("Erro frota:", e); }
+
+        // Buscar Oficinas
+        try {
+            const resOficina = await fetch(URL_OFICINAS);
+            if (resOficina.ok) {
+                let oficinas = await resOficina.json();
+                if (!Array.isArray(oficinas) && oficinas.oficinas) oficinas = oficinas.oficinas;
+                if (!Array.isArray(oficinas)) oficinas = [oficinas];
+
+                const selectOficina = document.getElementById('empresaParceira');
+                selectOficina.innerHTML = '<option value="" disabled selected>Selecione o Fornecedor...</option>';
+                
+                oficinas.forEach(o => {
+                    const item = o.json || o;
+                    if(item.NOME) {
+                        let opt = document.createElement('option');
+                        opt.value = item.NOME;
+                        opt.innerText = item.NOME;
+                        selectOficina.appendChild(opt);
+                    }
+                });
+            }
+        } catch (e) { console.error("Erro oficina:", e); }
+    }
+
+    // Dispara o auto-preenchimento simultâneo de todas as variáveis da frota
+    document.getElementById('selectFrota').addEventListener('change', function() {
+        const frotaSelecionada = this.value;
+        const veiculo = dicionarioFrotas[frotaSelecionada];
+        
+        if (veiculo) {
+            document.getElementById('txtPlaca').value = veiculo.placa;
+            document.getElementById('txtModelo').value = veiculo.modelo;
+            document.getElementById('txtFilial').value = veiculo.filial;
+            document.getElementById('txtCnpj').value = veiculo.cnpj;
+        }
+    });
+
+    // Função de cadastro manual expandida para novas colunas
+    async function adicionarFrotaManual() {
+        const novaFrota = prompt("Digite o número da nova Frota (Ex: 2470):");
+        if (!novaFrota) return;
+        const novaPlaca = prompt(`Digite a Placa para a frota ${novaFrota} (Ex: ABC-1234):`).toUpperCase();
+        if (!novaPlaca) return;
+        const novoModelo = prompt(`Digite o Modelo do veículo (Ex: TOCO/TRUCK):`).toUpperCase();
+        if (!novoModelo) return;
+        const novaFilial = prompt(`Digite a Filial vinculada (Ex: DESTRO CASCAVEL):`).toUpperCase();
+        if (!novaFilial) return;
+        const novoCnpj = prompt(`Digite o CNPJ da frota/empresa (Ex: 00.000.000/0001-00):`);
+        if (!novoCnpj) return;
+
+        try {
+            const response = await fetch(URL_CAD_FROTA, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ FROTA: novaFrota, PLACA: novaPlaca, MODELO: novoModelo, FILIAL: novaFilial, CNPJ: novoCnpj })
+            });
+
+            if (response.ok) {
+                dicionarioFrotas[novaFrota] = { placa: novaPlaca, modelo: novoModelo, filial: novaFilial, cnpj: novoCnpj };
+                const selectFrota = document.getElementById('selectFrota');
+                let opt = document.createElement('option');
+                opt.value = novaFrota; opt.innerText = novaFrota;
+                selectFrota.appendChild(opt);
+                
+                selectFrota.value = novaFrota;
+                document.getElementById('txtPlaca').value = novaPlaca;
+                document.getElementById('txtModelo').value = novoModelo;
+                document.getElementById('txtFilial').value = novaFilial;
+                document.getElementById('txtCnpj').value = novoCnpj;
+                alert(`Frota ${novaFrota} adicionada e sincronizada com sucesso!`);
+            } else {
+                alert("Erro ao salvar o cadastro na Azure. Código: " + response.status);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Não foi possível conectar com o fluxo de cadastro na Azure.");
+        }
+    }
+
+    async function adicionarOficinaManual() {
+        const novaOficina = prompt("Digite o nome da nova oficina/fornecedor:").toUpperCase();
+        if (!novaOficina) return;
+
+        try {
+            const response = await fetch(URL_CAD_OFICINA, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ NOME: novaOficina })
+            });
+
+            if (response.ok) {
+                const selectOficina = document.getElementById('empresaParceira');
+                let opt = document.createElement('option');
+                opt.value = novaOficina; opt.innerText = novaOficina;
+                selectOficina.appendChild(opt);
+                selectOficina.value = novaOficina;
+                alert(`Fornecedor ${novaOficina} cadastrado com sucesso no banco de dados!`);
+            } else {
+                alert("Erro ao salvar o fornecedor na Azure. Código: " + response.status);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Não foi possível conectar com o fluxo de cadastro na Azure.");
+        }
+    }
+
+    document.getElementById('dataSolicitacao').valueAsDate = new Date();
+    carregarBancoDeDados();
+
+    // Controle de Envio e Impressão
+    document.getElementById('osForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('btnSalvar');
+        const btnText = btn.querySelector('span');
+        btnText.innerText = "Registrando no sistema...";
+        btn.disabled = true;
+
+        let dataOriginal = document.getElementById('dataSolicitacao').value;
+        let dataFormatadaBR = "";
+        let diaStr = "", mesStr = "", anoStr = "";
+
+        if (dataOriginal) {
+            const [ano, mes, dia] = dataOriginal.split('-');
+            diaStr = dia; mesStr = mes; anoStr = ano;
+            dataFormatadaBR = `${dia}/${mes}/${ano}`;
+        } else {
+            const hoje = new Date();
+            diaStr = String(hoje.getDate()).padStart(2, '0');
+            mesStr = String(hoje.getMonth() + 1).padStart(2, '0');
+            anoStr = hoje.getFullYear();
+            dataFormatadaBR = `${diaStr}/${mesStr}/${anoStr}`;
+        }
+
+        const mesesExtenso = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+        const mesExtenso = mesesExtenso[parseInt(mesStr, 10) - 1];
+        
+        const frotaValor = document.getElementById('selectFrota').value;
+        const placaValor = document.getElementById('txtPlaca').value;
+        const modeloValor = document.getElementById('txtModelo').value;
+        const filialValor = document.getElementById('txtFilial').value;
+        const cnpjValor = document.getElementById('txtCnpj').value;
+
+        // Injeta todas as informações dinâmicas no espelho industrial de impressão
+        document.getElementById('printDataCidade').innerText = `Cascavel - PR, ${diaStr} de ${mesExtenso} de ${anoStr}.`;
+        document.getElementById('printData').innerText = dataFormatadaBR;
+        document.getElementById('printFrota').innerText = frotaValor;
+        document.getElementById('printPlaca').innerText = placaValor;
+        document.getElementById('printModelo').innerText = modeloValor;
+        document.getElementById('printFilial').innerText = filialValor;
+        document.getElementById('printCnpj').innerText = cnpjValor;
+        document.getElementById('printOficina').innerText = document.getElementById('empresaParceira').value.toUpperCase();
+        document.getElementById('printDescricao').innerText = document.getElementById('descricao').value;
+
+        const payload = {
+            dataSolicitacao: dataFormatadaBR,
+            frota: frotaValor,
+            placa: placaValor,
+            modelo: modeloValor,
+            filial: filialValor,
+            cnpj: cnpjValor, // Mapeia os novos parâmetros no payload do envio
+            empresaParceira: document.getElementById('empresaParceira').value,
+            descricao: document.getElementById('descricao').value
+        };
+
+        try {
+            const response = await fetch(URL_SALVAR, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                alert("Ordem de Serviço registrada com sucesso!");
+                window.print();
+                
+                document.getElementById('osForm').reset();
+                document.getElementById('dataSolicitacao').valueAsDate = new Date();
+                document.getElementById('txtPlaca').value = "";
+                document.getElementById('txtModelo').value = "";
+                document.getElementById('txtFilial').value = "";
+                document.getElementById('txtCnpj').value = "";
+            } else {
+                alert("Erro ao salvar no n8n. Código: " + response.status);
+            }
+        } catch (error) {
+            console.error("Erro:", error);
+            alert("Falha de conexão com o n8n na Azure.");
+        } finally {
+            btnText.innerText = "Salvar no Sistema e Imprimir OS";
+            btn.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>
