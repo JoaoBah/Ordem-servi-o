@@ -47,7 +47,7 @@
             font-weight: 700;
             border-radius: 20px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -57,10 +57,10 @@
 
         .btn-toggle-historico:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 255, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Layout em Grade Dinâmica - Form e Histórico com 650px idênticos */
+        /* Layout em Grade Dinâmica */
         .dashboard-layout {
             display: grid;
             grid-template-columns: 650px 0px; 
@@ -73,7 +73,6 @@
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Quando aberto, o histórico ganha os mesmos 650px do formulário */
         .dashboard-layout.historico-aberto {
             grid-template-columns: 650px 650px;
             gap: 20px;
@@ -86,7 +85,6 @@
             justify-content: center;
         }
 
-        /* Controle de visibilidade do Histórico lateral */
         .column-right {
             opacity: 0;
             pointer-events: none;
@@ -99,7 +97,6 @@
             pointer-events: auto;
         }
 
-        /* Container Original Estilizado */
         .container { 
             background: var(--card-bg); 
             width: 100%; 
@@ -118,222 +115,145 @@
             padding-bottom: 8px; 
         }
         
-        .logo-container {
-            max-width: 160px;
-            margin: 0 auto;
-        }
+        .logo-container { max-width: 160px; margin: 0 auto; }
+        .logo-container img { width: 100%; height: auto; display: block; }
+        .header h2 { color: var(--text-dark); font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-top: 5px; }
 
-        .logo-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .form-section { background: #fafbfc; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 15px; margin-bottom: 10px; }
+        .section-title { font-size: 11px; font-weight: 700; color: var(--movistar-blue); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.8px; display: flex; align-items: center; gap: 8px; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: #e5e7eb; }
 
-        .header h2 { 
-            color: var(--text-dark); 
-            font-size: 18px; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px;
-            font-weight: 700;
-            margin-top: 5px;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .frota-grid-tela { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .servicos-grid-tela { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .form-group { margin-bottom: 5px; }
 
-        .form-section {
-            background: #fafbfc;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-        }
+        label { font-size: 11px; font-weight: 700; color: #374151; display: block; margin-bottom: 4px; text-transform: uppercase; }
+        input, select { width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px; background-color: #fff; color: var(--text-dark); }
+        input:disabled { background-color: #f3f4f6; color: #000; font-weight: bold; cursor: not-allowed; }
 
-        .section-title {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--movistar-blue);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 0.8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #e5e7eb;
-        }
-
-        .form-row { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 12px; 
-        }
-
-        .frota-grid-tela {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .servicos-grid-tela {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .form-group { 
-            margin-bottom: 5px; 
-        }
-
-        label { 
-            font-size: 11px; 
-            font-weight: 700; 
-            color: #374151; 
-            display: block; 
-            margin-bottom: 4px; 
-            text-transform: uppercase;
-        }
-        
-        input, select { 
-            width: 100%; 
-            padding: 8px 10px; 
-            border: 1px solid var(--border-color); 
-            border-radius: 6px; 
-            font-size: 13px; 
-            background-color: #fff; 
-            color: var(--text-dark); 
-        }
-
-        input:disabled {
-            background-color: #f3f4f6;
-            color: #000;
-            font-weight: bold;
-            cursor: not-allowed;
-        }
-
-        .search-input-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
+        .search-input-container { display: flex; align-items: center; position: relative; }
         .search-input-container select { padding-right: 35px; }
 
         .btn-add-shortcut {
-            background-color: #f3f4f6;
-            color: #111827;
-            border: 1px solid var(--border-color);
-            border-left: none;
-            padding: 8px 12px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            border-top-right-radius: 6px;
-            border-bottom-right-radius: 6px;
-            position: absolute;
-            right: 0;
-            height: 100%;
+            background-color: #f3f4f6; color: #111827; border: 1px solid var(--border-color); border-left: none;
+            padding: 8px 12px; font-size: 13px; font-weight: bold; cursor: pointer; border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px; position: absolute; right: 0; height: 100%;
         }
 
-        button[type="submit"] { 
-            background-color: var(--movistar-blue); 
-            color: white; 
-            padding: 12px 20px; 
-            border: none; 
-            border-radius: 6px; 
-            cursor: pointer; 
-            width: 100%; 
-            font-size: 13px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            margin-top: 5px; 
-        }
+        button[type="submit"] { background-color: var(--movistar-blue); color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 13px; font-weight: 700; text-transform: uppercase; margin-top: 5px; }
 
         /* ==========================================
-           ESTRUTURA DO PAINEL DE HISTÓRICO SIMÉTRICO
+           TABELA SEM ESTOURO HORIZONTAL
            ========================================== */
-        .panel-header {
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid #eef0f5; }
+        .panel-header h3 { font-size: 16px; text-transform: uppercase; font-weight: 700; color: var(--text-dark); }
+
+        .filter-bar { display: grid; grid-template-columns: 80px 80px 150px 1fr; gap: 10px; background: #fafbfc; padding: 10px; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 12px; }
+
+        .table-wrapper { 
+            flex: 1; 
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 8px; 
+            background: #fff; 
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 12px; 
+            text-align: left;
+            table-layout: fixed; 
+        }
+
+        th { background: #f3f4f6; color: #111827; font-weight: 700; padding: 10px; position: sticky; top: 0; border-bottom: 2px solid #e5e7eb; text-transform: uppercase; font-size: 10px; z-index: 10; }
+
+        .th-check, .td-check { text-align: center; width: 35px; padding: 8px 5px; }
+        .col-os { width: 55px; }
+        .col-data { width: 85px; }
+        .col-frota { width: 65px; }
+        .col-prestador { width: 130px; }
+        
+        td { 
+            padding: 8px 10px; 
+            border-bottom: 1px solid #edf2f7; 
+            color: #2d3748; 
+            font-weight: 600; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
+        tbody tr { cursor: pointer; transition: background-color 0.15s ease; }
+        tbody tr:hover { background-color: #f1f5f9; }
+        tbody tr.linha-selecionada { background-color: #e0f2fe !important; }
+        
+        .td-check input[type="checkbox"], .th-check input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+        .badge-frota { background: #e0e7ff; color: #3730a3; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+        .badge-os-numero { background: #e5e7eb; color: #1f2937; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+
+        /* PAGINADOR */
+        .pagination-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #eef0f5;
-        }
-
-        .panel-header h3 {
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .filter-bar {
-            display: grid;
-            grid-template-columns: 80px 80px 150px 1fr;
-            gap: 10px;
-            background: #fafbfc;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            margin-bottom: 12px;
-        }
-
-        .table-wrapper {
-            flex: 1;
-            overflow-y: auto;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
+            gap: 5px;
+            padding: 10px 0 0 0;
             background: #fff;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .btn-page {
+            background-color: #f3f4f6;
+            border: 1px solid var(--border-color);
+            color: #374151;
+            padding: 5px 10px;
             font-size: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #f3f4f6;
-            color: #111827;
             font-weight: 700;
-            padding: 10px;
-            position: sticky;
-            top: 0;
-            border-bottom: 2px solid #e5e7eb;
-            text-transform: uppercase;
-            font-size: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        td {
-            padding: 8px 10px;
-            border-bottom: 1px solid #edf2f7;
-            color: #2d3748;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 200px;
+        .btn-page:hover { background-color: #e5e7eb; }
+        .btn-page.active { background-color: var(--movistar-blue); color: white; border-color: var(--movistar-blue); }
+
+        /* POP-UP MENU CONTEXTUAL */
+        .popup-acoes-menu {
+            position: fixed; 
+            display: none; 
+            background: #ffffff; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.15); 
+            padding: 6px;
+            z-index: 9999; 
+            min-width: 160px; 
+            animation: popupFadeIn 0.12s ease-out;
         }
 
-        tr:hover { background-color: #f8fafc; }
-        .badge-frota { background: #e0e7ff; color: #3730a3; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
-        .badge-os-numero { background: #e5e7eb; color: #1f2937; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
-        
-        /* Checkbox na tabela */
-        .td-check, .th-check { text-align: center; width: 35px; padding: 8px 5px; }
-        .td-check input[type="checkbox"], .th-check input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+        @keyframes popupFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        .popup-acoes-item {
+            display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 12px; font-size: 13px;
+            font-weight: 600; text-align: left; color: #334155; background: none; border: none; border-radius: 6px;
+            cursor: pointer; transition: background-color 0.2s;
+        }
+        .popup-acoes-item:hover { background-color: #f1f5f9; }
+        .popup-acoes-item.item-imprimir { color: #10b981; }
+        .popup-acoes-item.item-imprimir:hover { background-color: #ecfdf5; }
+        .popup-acoes-item.item-alterar { color: #2563eb; }
+        .popup-acoes-item.item-alterar:hover { background-color: #eff6ff; }
+        .popup-acoes-item.item-excluir { color: #dc2626; }
+        .popup-acoes-item.item-excluir:hover { background-color: #fef2f2; }
 
         @media (max-width: 1350px) {
             .dashboard-layout.historico-aberto { grid-template-columns: 1fr; height: auto; overflow: auto; }
-            body { overflow: auto; }
-            .column-right { height: 450px; }
+            body { overflow: auto; } .column-right { height: 500px; }
         }
 
-        /* Ocultação de elementos na Impressão Física */
+        /* Impressão Física */
         .print-header-layout, .print-grid, .print-textarea-lines, .signature-container, .footer-institutional { display: none; }
 
         @media print {
@@ -360,20 +280,28 @@
 </head>
 <body>
 
-<!-- BOTÃO DE ALTERNÂNCIA FLUTUANTE -->
 <button class="btn-toggle-historico" id="btnToggle" onclick="alternarPainelHistorico()">
     <span id="btnToggleIcon">📋</span> <span id="btnToggleText">Ver Histórico</span>
 </button>
 
+<div class="popup-acoes-menu" id="popupMenuAcoes">
+    <button type="button" class="popup-acoes-item item-imprimir" id="popupBtnImprimir">
+        🖨️ Reimprimir OS
+    </button>
+    <button type="button" class="popup-acoes-item item-alterar" id="popupBtnAlterar">
+        ✏️ Alterar Ordem
+    </button>
+    <button type="button" class="popup-acoes-item item-excluir" id="popupBtnExcluir">
+        🗑️ Excluir Ordem
+    </button>
+</div>
+
 <div class="dashboard-layout" id="layoutPrincipal">
     
-    <!-- COLUNA DA ESQUERDA: FORMULÁRIO COMPLETO -->
     <div class="column-left">
         <div class="container">
             <div class="header">
-                <div class="logo-container">
-                    <img src="./img/LOGO MOVISTAR.png" alt="Movistar Logística">
-                </div>
+                <div class="logo-container"><img src="./img/LOGO MOVISTAR.png" alt="Movistar Logística"></div>
                 <h2>Ordem de Serviço de Manutenção</h2>
             </div>
             
@@ -398,29 +326,17 @@
                     </div>
                     
                     <div class="frota-grid-tela">
-                        <div class="form-group">
-                            <label for="txtPlaca">Placa</label>
-                            <input type="text" id="txtPlaca" placeholder="Automático" disabled required>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtModelo">Modelo Veículo</label>
-                            <input type="text" id="txtModelo" placeholder="Automático" disabled required>
-                        </div>
-                        <div class="form-group">
-                            <label for="txtFilial">Filial Movistar</label>
-                            <input type="text" id="txtFilial" placeholder="Automático" disabled required>
-                        </div>
-                        <div class="form-group" style="grid-column: span 3; margin-top: 5px;">
-                            <label for="txtCnpj">CNPJ da Frota</label>
-                            <input type="text" id="txtCnpj" placeholder="Automático" disabled required>
-                        </div>
+                        <div class="form-group"><label>Placa</label><input type="text" id="txtPlaca" placeholder="Automático" disabled required></div>
+                        <div class="form-group"><label>Modelo Veículo</label><input type="text" id="txtModelo" placeholder="Automático" disabled required></div>
+                        <div class="form-group"><label>Filial Movistar</label><input type="text" id="txtFilial" placeholder="Automático" disabled required></div>
+                        <div class="form-group" style="grid-column: span 3; margin-top: 5px;"><label>CNPJ da Frota</label><input type="text" id="txtCnpj" placeholder="Automático" disabled required></div>
                     </div>
                 </div>
 
                 <div class="form-section">
                     <div class="section-title">Direcionamento</div>
                     <div class="form-group">
-                        <label for="empresaParceira">Oficina / Prestador de Serviço</label>
+                        <label>Oficina / Prestador de Serviço</label>
                         <div class="search-input-container">
                             <select id="empresaParceira" required>
                                 <option value="" disabled selected>Selecione o Fornecedor...</option>
@@ -432,20 +348,11 @@
                 </div>
 
                 <div class="form-section">
-                    <div class="section-title">Especificação Técnica dos Serviços</div>
-                    <div class="form-group" style="margin-bottom: 10px;">
-                        <label for="servico1">1º Serviço Solicitado (Obrigatório)</label>
-                        <input type="text" id="servico1" placeholder="Ex: Troca de óleo do motor e filtros" required>
-                    </div>
+                    <div class="section-title">Especificação Técnica</div>
+                    <div class="form-group" style="margin-bottom: 10px;"><label>1º Serviço (Obrigatório)</label><input type="text" id="servico1" placeholder="Ex: Troca de óleo" required></div>
                     <div class="servicos-grid-tela">
-                        <div class="form-group">
-                            <label for="servico2">2º Serviço Solicitado</label>
-                            <input type="text" id="servico2" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="servico3">3º Serviço Solicitado</label>
-                            <input type="text" id="servico3" placeholder="">
-                        </div>
+                        <div class="form-group"><label>2º Serviço</label><input type="text" id="servico2"></div>
+                        <div class="form-group"><label>3º Serviço</label><input type="text" id="servico3"></div>
                     </div>
                 </div>
 
@@ -454,63 +361,46 @@
         </div>
     </div>
 
-    <!-- COLUNA DA DIREITA: HISTÓRICO EXPANSÍVEL SIMÉTRICO (650px) -->
     <div class="column-right">
-        <div class="container" style="display: flex; flex-direction: column;">
+        <div class="container" style="display: flex; flex-direction: column; height: 100%;">
             <div class="panel-header">
-                <h3>Histórico de Ordens de Serviço</h3>
-                <div style="text-align: right; font-size: 13px; font-weight: bold; color: var(--movistar-blue);">
+                <h3>Histórico de Ordens</h3>
+                <div style="font-size: 13px; font-weight: bold; color: var(--movistar-blue);">
                     <span id="totalRegistros">Carregando...</span> 
                     <span id="contadorSelecionados" style="color: #10b981; margin-left: 8px;">(0 selecionadas)</span>
                 </div>
             </div>
 
-            <!-- Filtros Inteligentes (Reorganizados para incluir Nº OS) -->
             <div class="filter-bar">
-                <div class="filter-group">
-                    <label>Nº OS</label>
-                    <input type="text" id="filtroNumeroOS" placeholder="Ex: 5" oninput="filtrarHistorico()">
-                </div>
-                <div class="filter-group">
-                    <label>Frota</label>
-                    <input type="text" id="filtroFrota" placeholder="2470" oninput="filtrarHistorico()">
-                </div>
-                <div class="filter-group">
-                    <label>Prestador / Oficina</label>
-                    <input type="text" id="filtroPrestador" placeholder="Oficina..." oninput="filtrarHistorico()">
-                </div>
-                <div class="filter-group">
-                    <label>Buscar por Serviço</label>
-                    <input type="text" id="filtroServico" placeholder="Ex: Freio, óleo..." oninput="filtrarHistorico()">
-                </div>
+                <div class="filter-group"><label>Nº OS</label><input type="text" id="filtroNumeroOS" placeholder="Ex: 5" oninput="filtrarHistorico()"></div>
+                <div class="filter-group"><label>Frota</label><input type="text" id="filtroFrota" placeholder="2470" oninput="filtrarHistorico()"></div>
+                <div class="filter-group"><label>Prestador</label><input type="text" id="filtroPrestador" placeholder="Oficina..." oninput="filtrarHistorico()"></div>
+                <div class="filter-group"><label>Serviço</label><input type="text" id="filtroServico" placeholder="Ex: óleo..." oninput="filtrarHistorico()"></div>
             </div>
 
-            <!-- Tabela Sincronizada -->
             <div class="table-wrapper">
                 <table>
                     <thead>
                         <tr>
                             <th class="th-check"><input type="checkbox" id="checkMarcarTodos" onclick="marcarDesmarcarTodos(this)"></th>
-                            <th style="width: 55px;">Nº OS</th>
-                            <th style="width: 80px;">Data</th>
-                            <th style="width: 65px;">Frota</th>
-                            <th style="width: 140px;">Prestador</th>
+                            <th class="col-os">Nº OS</th>
+                            <th class="col-data">Data</th>
+                            <th class="col-frota">Frota</th>
+                            <th class="col-prestador">Prestador</th>
                             <th>Serviços Solicitados</th>
                         </tr>
                     </thead>
                     <tbody id="dadosHistorico">
-                        <tr>
-                            <td colspan="6" style="text-align: center; padding: 20px; color: #888;">Buscando dados na planilha Movistar...</td>
-                        </tr>
+                        <tr><td colspan="6" style="text-align: center; color: #888; padding: 20px;">Buscando dados na planilha Movistar...</td></tr>
                     </tbody>
                 </table>
             </div>
+
+            <div class="pagination-container" id="boxPaginacao"></div>
         </div>
     </div>
-
 </div>
 
-<!-- COMPONENTES DA FOLHA DE IMPRESSÃO FÍSICA -->
 <div class="print-header-layout">
     <div class="print-logo-box"><img src="./img/LOGO MOVISTAR.png"></div>
     <div class="print-title-box">
@@ -543,7 +433,11 @@
 </div>
 
 <script>
+    // CONFIGURAÇÃO DOS WEBHOOKS INTEGRADOS
     const URL_SALVAR = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/ordem-servico-caminhao";
+    const URL_ALTERAR = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/alterar-ordem";
+    const URL_DELETAR = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/deletar-os";
+    
     const URL_FROTA = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/buscar-frotas";
     const URL_OFICINAS = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/buscar-oficinas";
     const URL_CAD_FROTA = "https://n8nd-bjfva4gshggrgbe8.eastus-01.azurewebsites.net/webhook/cadastrar-frota";
@@ -552,21 +446,19 @@
 
     let dicionarioFrotas = {};
     let bancoOrdensCompleto = []; 
+    let listaFiltradaGlobal = []; 
+    let paginaAtual = 1;
+    const itensPorPagina = 14;
+    let osSendoEditada = null; 
 
     function alternarPainelHistorico() {
         const layout = document.getElementById('layoutPrincipal');
         const btnText = document.getElementById('btnToggleText');
         const btnIcon = document.getElementById('btnToggleIcon');
-        
         layout.classList.toggle('historico-aberto');
-        
-        if(layout.classList.contains('historico-aberto')) {
-            btnText.innerText = "Fechar";
-            btnIcon.innerText = "✖";
-        } else {
-            btnText.innerText = "Ver Histórico";
-            btnIcon.innerText = "📋";
-        }
+        fecharPopUpAcoes();
+        if(layout.classList.contains('historico-aberto')) { btnText.innerText = "Fechar"; btnIcon.innerText = "✖"; } 
+        else { btnText.innerText = "Ver Histórico"; btnIcon.innerText = "📋"; }
     }
 
     function obterValorCamaleao(obj, termosBusca) {
@@ -586,16 +478,11 @@
     function construirDescricaoServicos(item) {
         let descPronta = obterValorCamaleao(item, ['descricao', 'descrição', 'descricaoservico']);
         if (descPronta && descPronta !== "---") return descPronta;
-
         let s1 = obterValorCamaleao(item, ['Primeiro serviço', 'Primeiro servico', 'servico1', 'serviço1']);
         let s2 = obterValorCamaleao(item, ['Segundo serviço', 'Segundo servico', 'servico2', 'serviço2']);
         let s3 = obterValorCamaleao(item, ['Terceiro serviço', 'Terceiro servico', 'servico3', 'serviço3']);
-
         let arr = [];
-        if (s1 && s1 !== "---") arr.push(`1º ${s1}`);
-        if (s2 && s2 !== "---") arr.push(`2º ${s2}`);
-        if (s3 && s3 !== "---") arr.push(`3º ${s3}`);
-
+        if (s1 && s1 !== "---") arr.push(s1); if (s2 && s2 !== "---") arr.push(s2); if (s3 && s3 !== "---") arr.push(s3);
         return arr.length > 0 ? arr.join(" | ") : "---";
     }
 
@@ -607,17 +494,14 @@
                 if (!Array.isArray(frotas) && frotas.frotas) frotas = frotas.frotas;
                 if (!Array.isArray(frotas)) frotas = [frotas];
                 const selectFrota = document.getElementById('selectFrota');
-                
                 frotas.forEach(f => {
                     const item = f.json || f;
                     let frotaNum = item.FROTA || item.frota || item.Frota;
                     let placaTexto = item.PLACA || item.placa || item.Placa;
                     if(frotaNum && placaTexto) {
                         dicionarioFrotas[frotaNum] = { 
-                            placa: placaTexto, 
-                            modelo: item.MODELO || item.modelo || "NÃO INFORMADO", 
-                            filial: item.FILIAL || item.filial || "NÃO INFORMADO", 
-                            cnpj: item.CNPJ || item.cnpj || "NÃO INFORMADO" 
+                            placa: placaTexto, modelo: item.MODELO || item.modelo || "NÃO INFORMADO", 
+                            filial: item.FILIAL || item.filial || "NÃO INFORMADO", cnpj: item.CNPJ || item.cnpj || "NÃO INFORMADO" 
                         };
                         if (![...selectFrota.options].some(o => o.value === frotaNum.toString())) {
                             let opt = document.createElement('option'); opt.value = frotaNum; opt.innerText = frotaNum;
@@ -635,7 +519,6 @@
                 if (!Array.isArray(oficinas) && oficinas.oficinas) oficinas = oficinas.oficinas;
                 if (!Array.isArray(oficinas)) oficinas = [oficinas];
                 const selectOficina = document.getElementById('empresaParceira');
-                
                 oficinas.forEach(o => {
                     const item = o.json || o;
                     let nomeOficina = item.NOME || item.nome || item.Nome;
@@ -655,58 +538,61 @@
     async function carregarHistoricoTabela() {
         try {
             const resHist = await fetch(URL_HISTORICO);
-            if (!resHist.ok) throw new Error("Erro na requisição");
+            if (!resHist.ok) throw new Error("Erro");
             let dadosBrutos = await resHist.json();
             let listaTratada = [];
-
-            if (Array.isArray(dadosBrutos)) {
-                listaTratada = dadosBrutos;
-            } else if (dadosBrutos && typeof dadosBrutos === 'object') {
-                let chavesPossiveis = ['ordens', 'data', 'rows', 'output', 'body'];
-                for (let chave of chavesPossiveis) {
-                    if (Array.isArray(dadosBrutos[chave])) {
-                        listaTratada = dadosBrutos[chave];
-                        break;
-                    }
-                }
+            if (Array.isArray(dadosBrutos)) { listaTratada = dadosBrutos; } 
+            else if (dadosBrutos && typeof dadosBrutos === 'object') {
+                let chaves = ['ordens', 'data', 'rows', 'output', 'body'];
+                for (let c of chaves) { if (Array.isArray(dadosBrutos[c])) { listaTratada = dadosBrutos[c]; break; } }
             }
-
             bancoOrdensCompleto = listaTratada.map(item => item.json || item).filter(item => item && typeof item === 'object');
-            renderizarTabela(bancoOrdensCompleto);
+            
+            sincronizarListaFiltradaGlobal();
+            paginaAtual = 1;
+            renderizarApenasPaginaAtual();
         } catch (e) {
-            document.getElementById('dadosHistorico').innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">Erro ao carregar o histórico.</td></tr>`;
+            document.getElementById('dadosHistorico').innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">Erro ao carregar dados.</td></tr>`;
         }
     }
 
-    function renderizarTabela(lista) {
-        const tbody = document.getElementById('dadosHistorico');
-        document.getElementById('totalRegistros').innerText = `${lista.length} registros`;
-        if(lista.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 25px; color: #888;">Nenhuma OS registrada.</td></tr>`;
-            return;
-        }
-        tbody.innerHTML = "";
-
-        let listaNumerada = lista.map((item, index) => {
+    function sincronizarListaFiltradaGlobal() {
+        listaFiltradaGlobal = bancoOrdensCompleto.map((item, index) => {
             let numGravado = obterValorCamaleao(item, ['numero_os', 'numeroos', 'numero-os', 'Nº OS']);
             return { item: item, numeroOS: numGravado ? parseInt(numGravado, 10) : (index + 1) };
         });
+        listaFiltradaGlobal.reverse();
+    }
 
-        listaNumerada.reverse();
+    function renderizarApenasPaginaAtual() {
+        const tbody = document.getElementById('dadosHistorico');
+        document.getElementById('totalRegistros').innerText = `${listaFiltradaGlobal.length} registros`;
+        
+        if (listaFiltradaGlobal.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 25px; color: #888;">Nenhum registro encontrado.</td></tr>`;
+            document.getElementById('boxPaginacao').innerHTML = "";
+            return;
+        }
 
-        listaNumerada.forEach(registro => {
+        tbody.innerHTML = "";
+
+        const indiceInicio = (paginaAtual - 1) * itensPorPagina;
+        const indiceFim = indiceInicio + itensPorPagina;
+        const subListaExibicao = listaFiltradaGlobal.slice(indiceInicio, indiceFim);
+
+        subListaExibicao.forEach(registro => {
             let item = registro.item;
-            let numeroOS = registro.numeroOS;
-
             let tr = document.createElement('tr');
+            tr.setAttribute('onclick', `abrirPopUpAcoes(event, ${registro.numeroOS}, this)`);
+            
             let dataOS = obterValorCamaleao(item, ['data', 'dataSolicitacao', 'datasolicitacao']);
             let frotaOS = obterValorCamaleao(item, ['frota', 'prefixo', 'caminhao']);
             let prestadorOS = obterValorCamaleao(item, ['empresaparceira', 'prestador', 'oficina', 'nome']);
             let descOS = construirDescricaoServicos(item);
 
             tr.innerHTML = `
-                <td class="td-check"><input type="checkbox" class="os-checkbox" onclick="atualizarContadorSelecionados()"></td>
-                <td><span class="badge-os-numero">#${numeroOS}</span></td>
+                <td class="td-check" onclick="event.stopPropagation();"><input type="checkbox" class="os-checkbox" onclick="atualizarContadorSelecionados()"></td>
+                <td><span class="badge-os-numero">#${registro.numeroOS}</span></td>
                 <td>${dataOS || "---"}</td>
                 <td><span class="badge-frota">${frotaOS || "---"}</span></td>
                 <td>${(prestadorOS || "---").toUpperCase()}</td>
@@ -717,6 +603,27 @@
 
         document.getElementById('checkMarcarTodos').checked = false;
         atualizarContadorSelecionados();
+        construirBotoesPaginador();
+    }
+
+    function construirBotoesPaginador() {
+        const boxPaginacao = document.getElementById('boxPaginacao');
+        boxPaginacao.innerHTML = "";
+        const totalPaginas = Math.ceil(listaFiltradaGlobal.length / itensPorPagina);
+        if (totalPaginas <= 1) return;
+
+        for (let i = 1; i <= totalPaginas; i++) {
+            let btn = document.createElement('button');
+            btn.type = "button";
+            btn.className = `btn-page ${i === paginaAtual ? 'active' : ''}`;
+            btn.innerText = i;
+            btn.onclick = function() {
+                paginaAtual = i;
+                renderizarApenasPaginaAtual();
+                fecharPopUpAcoes();
+            };
+            boxPaginacao.appendChild(btn);
+        }
     }
 
     function filtrarHistorico() {
@@ -729,8 +636,9 @@
             let numGravado = obterValorCamaleao(item, ['numero_os', 'numeroos', 'numero-os', 'Nº OS']);
             return { item: item, numeroOS: numGravado ? parseInt(numGravado, 10) : (index + 1) };
         });
+        listaMapeadaCompleta.reverse();
 
-        const listaFiltrada = listaMapeadaCompleta.filter(registro => {
+        listaFiltradaGlobal = listaMapeadaCompleta.filter(registro => {
             let item = registro.item;
             let numeroString = registro.numeroOS.toString();
             let frotaTexto = obterValorCamaleao(item, ['frota', 'prefixo', 'caminhao']).toLowerCase();
@@ -743,43 +651,132 @@
                    descricaoTexto.includes(fServico);
         });
 
-        const tbody = document.getElementById('dadosHistorico');
-        tbody.innerHTML = "";
-        
-        let filtradaInvertida = [...listaFiltrada].reverse();
-        
-        if(filtradaInvertida.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px; color: #888;">Nenhum registro encontrado.</td></tr>`;
-            document.getElementById('totalRegistros').innerText = `0 registros`;
-            return;
-        }
-
-        document.getElementById('totalRegistros').innerText = `${filtradaInvertida.length} registros`;
-
-        filtradaInvertida.forEach(registro => {
-            let item = registro.item;
-            let tr = document.createElement('tr');
-            let dataOS = obterValorCamaleao(item, ['data', 'dataSolicitacao', 'datasolicitacao']);
-            let frotaOS = obterValorCamaleao(item, ['frota', 'prefixo', 'caminhao']);
-            let prestadorOS = obterValorCamaleao(item, ['empresaparceira', 'prestador', 'oficina', 'nome']).toLowerCase();
-            let descOS = construirDescricaoServicos(item);
-
-            tr.innerHTML = `
-                <td class="td-check"><input type="checkbox" class="os-checkbox" onclick="atualizarContadorSelecionados()"></td>
-                <td><span class="badge-os-numero">#${registro.numeroOS}</span></td>
-                <td>${dataOS || "---"}</td>
-                <td><span class="badge-frota">${frotaOS || "---"}</span></td>
-                <td>${prestadorOS.toUpperCase()}</td>
-                <td title="${descOS}">${descOS}</td>
-            `;
-            tbody.appendChild(tr);
-        });
-
-        document.getElementById('checkMarcarTodos').checked = false;
-        atualizarContadorSelecionados();
+        paginaAtual = 1;
+        fecharPopUpAcoes();
+        renderizarApenasPaginaAtual();
     }
 
-    // Gerenciador dos checkboxes extras
+    /* ========================================================
+       GERENCIAMENTO E OPERAÇÕES DO POP-UP
+       ======================================================== */
+    function abrirPopUpAcoes(evento, numeroOS, elementoTr) {
+        evento.stopPropagation();
+        
+        document.querySelectorAll('#dadosHistorico tr').forEach(tr => tr.classList.remove('linha-selecionada'));
+        elementoTr.classList.add('linha-selecionada');
+
+        const popup = document.getElementById('popupMenuAcoes');
+        popup.style.left = `${evento.clientX + 5}px`;
+        popup.style.top = `${evento.clientY + 5}px`;
+        popup.style.display = 'block';
+
+        let correspondenciaEncontrada = bancoOrdensCompleto.find((item, index) => {
+            let numGravado = obterValorCamaleao(item, ['numero_os', 'numeroos', 'numero-os', 'Nº OS']);
+            let numCalculado = numGravado ? parseInt(numGravado, 10) : (index + 1);
+            return numCalculado === numeroOS;
+        });
+
+        document.getElementById('popupBtnImprimir').onclick = function() {
+            if(correspondenciaEncontrada) reimprimirOrdemServicoFisica(numeroOS, correspondenciaEncontrada);
+            fecharPopUpAcoes();
+        };
+
+        document.getElementById('popupBtnAlterar').onclick = function() {
+            alterarOrdemServico(numeroOS); fecharPopUpAcoes();
+        };
+        
+        document.getElementById('popupBtnExcluir').onclick = function() {
+            excluirOrdemServico(numeroOS); fecharPopUpAcoes();
+        };
+    }
+
+    function reimprimirOrdemServicoFisica(numeroOS, item) {
+        let dataOS = obterValorCamaleao(item, ['data', 'dataSolicitacao', 'datasolicitacao']) || "---";
+        let frotaOS = obterValorCamaleao(item, ['frota', 'prefixo', 'caminhao']) || "---";
+        let prestadorOS = (obterValorCamaleao(item, ['empresaparceira', 'prestador', 'oficina', 'nome']) || "---").toUpperCase();
+        
+        let s1 = obterValorCamaleao(item, ['Primeiro serviço', 'Primeiro servico', 'servico1', 'serviço1']);
+        let s2 = obterValorCamaleao(item, ['Segundo serviço', 'Segundo servico', 'servico2', 'serviço2']);
+        let s3 = obterValorCamaleao(item, ['Terceiro serviço', 'Terceiro servico', 'servico3', 'serviço3']);
+
+        let veiculoMemo = dicionarioFrotas[frotaOS] || {};
+
+        document.getElementById('printNumeroOS').innerText = numeroOS;
+        document.getElementById('printData').innerText = dataOS;
+        document.getElementById('printFrota').innerText = frotaOS;
+        document.getElementById('printPlaca').innerText = veiculoMemo.placa || "---";
+        document.getElementById('printModelo').innerText = veiculoMemo.modelo || "---";
+        document.getElementById('printFilial').innerText = veiculoMemo.filial || "---";
+        document.getElementById('printCnpj').innerText = veiculoMemo.cnpj || "---";
+        document.getElementById('printOficina').innerText = prestadorOS;
+        
+        document.getElementById('printServico1').innerText = s1 && s1 !== "---" ? `1º Serviço: ${s1}` : "1º Serviço: Verificar demanda geral";
+        document.getElementById('printServico2').innerText = s2 && s2 !== "---" ? `2º Serviço: ${s2}` : "";
+        document.getElementById('printServico3').innerText = s3 && s3 !== "---" ? `3º Serviço: ${s3}` : "";
+
+        if(dataOS.includes('/')) {
+            const arr = dataOS.split('/');
+            const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            let mExt = meses[parseInt(arr[1], 10) - 1] || "_________________";
+            document.getElementById('printDataCidade').innerText = `Cascavel - PR, ${arr[0]} de ${mExt} de 2026.`;
+        } else {
+            document.getElementById('printDataCidade').innerText = `Cascavel - PR, ____ de _________________ de 2026.`;
+        }
+
+        window.print();
+    }
+
+    function alterarOrdemServico(numeroOS) {
+        let os = bancoOrdensCompleto.find((item, index) => {
+            let numGravado = obterValorCamaleao(item, ['numero_os', 'numeroos', 'numero-os', 'Nº OS']);
+            let numCalculado = numGravado ? parseInt(numGravado, 10) : (index + 1);
+            return numCalculado === numeroOS;
+        });
+
+        if (!os) { alert("Não foi possível localizar os dados desta ordem."); return; }
+
+        osSendoEditada = numeroOS; 
+
+        document.getElementById('selectFrota').value = obterValorCamaleao(os, ['frota', 'prefixo', 'caminhao']);
+        document.getElementById('selectFrota').dispatchEvent(new Event('change'));
+        document.getElementById('empresaParceira').value = obterValorCamaleao(os, ['empresaparceira', 'prestador', 'oficina', 'nome']);
+        document.getElementById('servico1').value = obterValorCamaleao(os, ['Primeiro serviço', 'Primeiro servico', 'servico1', 'serviço1']);
+        document.getElementById('servico2').value = obterValorCamaleao(os, ['Segundo serviço', 'Segundo servico', 'servico2', 'serviço2']) || "";
+        document.getElementById('servico3').value = obterValorCamaleao(os, ['Terceiro serviço', 'Terceiro servico', 'servico3', 'serviço3']) || "";
+
+        document.getElementById('btnSalvar').querySelector('span').innerText = `Atualizar OS #${numeroOS}`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function excluirOrdemServico(numeroOS) {
+        const c = confirm(`🗑️ Deseja remover permanentemente do sistema a OS #${numeroOS}?`);
+        if(!c) return;
+        
+        try {
+            const response = await fetch(URL_DELETAR, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ numero_os: numeroOS })
+            });
+            if(response.ok) {
+                alert(`Ordem de serviço #${numeroOS} excluída com sucesso!`);
+                carregarHistoricoTabela();
+            } else {
+                alert("Ocorreu um erro no servidor ao tentar excluir.");
+            }
+        } catch(e) { alert("Falha na conexão de rede."); }
+    }
+
+    function fecharPopUpAcoes() {
+        document.getElementById('popupMenuAcoes').style.display = 'none';
+        document.querySelectorAll('#dadosHistorico tr').forEach(tr => tr.classList.remove('linha-selecionada'));
+    }
+
+    document.addEventListener('click', function(e) {
+        const popup = document.getElementById('popupMenuAcoes');
+        if (popup && popup.style.display === 'block' && !popup.contains(e.target)) fecharPopUpAcoes();
+    });
+
     function marcarDesmarcarTodos(masterCheckbox) {
         const checkboxes = document.querySelectorAll('.os-checkbox');
         checkboxes.forEach(cb => cb.checked = masterCheckbox.checked);
@@ -795,20 +792,17 @@
     document.getElementById('selectFrota').addEventListener('change', function() {
         const veiculo = dicionarioFrotas[this.value];
         if (veiculo) {
-            document.getElementById('txtPlaca').value = veiculo.placa;
-            document.getElementById('txtModelo').value = veiculo.modelo;
-            document.getElementById('txtFilial').value = veiculo.filial;
-            document.getElementById('txtCnpj').value = veiculo.cnpj;
+            document.getElementById('txtPlaca').value = veiculo.placa; document.getElementById('txtModelo').value = veiculo.modelo;
+            document.getElementById('txtFilial').value = veiculo.filial; document.getElementById('txtCnpj').value = veiculo.cnpj;
         }
     });
 
     async function adicionarFrotaManual() {
         const novaFrota = prompt("Número da Frota (Ex: 2470):"); if (!novaFrota) return;
-        const novaPlaca = prompt("Placa (Ex: ABC-1234):").toUpperCase(); if (!novaPlaca) return;
-        const novoModelo = prompt("Modelo (Ex: TRUCK):").toUpperCase(); if (!novoModelo) return;
-        const novaFilial = prompt("Filial (Ex: CASCAVEL):").toUpperCase(); if (!novaFilial) return;
-        const novoCnpj = prompt("CNPJ (Ex: 00.000.000/0001-00):"); if (!novoCnpj) return;
-
+        const novaPlaca = prompt("Placa:").toUpperCase().trim(); if (!novaPlaca) return;
+        const novoModelo = prompt("Modelo:").toUpperCase().trim(); if (!novoModelo) return;
+        const novaFilial = prompt("Filial:").toUpperCase().trim(); if (!novaFilial) return;
+        const novoCnpj = prompt("CNPJ:").trim(); if (!novoCnpj) return;
         try {
             const response = await fetch(URL_CAD_FROTA, {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -821,13 +815,13 @@
                 selectFrota.appendChild(opt); selectFrota.value = novaFrota;
                 document.getElementById('txtPlaca').value = novaPlaca; document.getElementById('txtModelo').value = novoModelo;
                 document.getElementById('txtFilial').value = novaFilial; document.getElementById('txtCnpj').value = novoCnpj;
-                alert("Frota adicionada com sucesso!");
+                alert("Frota adicionada com sucesso!"); carregarHistoricoTabela();
             }
-        } catch (err) { alert("Falha na conexão."); }
+        } catch (err) { alert("Erro de rede."); }
     }
 
     async function adicionarOficinaManual() {
-        const novaOficina = prompt("Nome da oficina:").toUpperCase(); if (!novaOficina) return;
+        const novaOficina = prompt("Nome da oficina:").toUpperCase().trim(); if (!novaOficina) return;
         try {
             const response = await fetch(URL_CAD_OFICINA, {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -839,72 +833,71 @@
                 selectOficina.appendChild(opt); selectOficina.value = novaOficina;
                 alert("Fornecedor cadastrado!");
             }
-        } catch (err) { alert("Falha na conexão."); }
+        } catch (err) { alert("Erro de rede."); }
     }
 
     document.getElementById('dataSolicitacao').valueAsDate = new Date();
     carregarBancoDeDados();
 
+    /* SUBMIT DO FORMULÁRIO (GERENCIA SALVAMENTO E ATUALIZAÇÃO FORÇANDO CAIXA ALTA) */
     document.getElementById('osForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = document.getElementById('btnSalvar'); const btnText = btn.querySelector('span');
         btnText.innerText = "Registrando..."; btn.disabled = true;
 
         let dataOriginal = document.getElementById('dataSolicitacao').value;
-        let dataFormatadaBR = "", diaStr = "", mesStr = "", anoStr = "";
-        if (dataOriginal) {
-            const [ano, mes, dia] = dataOriginal.split('-');
-            diaStr = dia; mesStr = mes; anoStr = ano; dataFormatadaBR = `${dia}/${mes}/${ano}`;
-        }
-
+        let dataFormatadaBR = "", diaStr = "", mesStr = "";
+        if (dataOriginal) { const [ano, mes, dia] = dataOriginal.split('-'); diaStr = dia; mesStr = mes; dataFormatadaBR = `${dia}/${mes}/${ano}`; }
         const mesesExtenso = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-        const mesExtenso = mesesExtenso[parseInt(mesStr, 10) - 1];
+        const mesExtenso = mesesExtenso[parseInt(mesStr, 10) - 1].toUpperCase();
         
+        // PADRONIZAÇÃO TRATADA: CAPTURA E CONVERTE STRINGS COMPLETAS PARA MAIÚSCULAS
         const frotaValor = document.getElementById('selectFrota').value;
-        const placaValor = document.getElementById('txtPlaca').value;
-        const modeloValor = document.getElementById('txtModelo').value;
-        const filialValor = document.getElementById('txtFilial').value;
-        const cnpjValor = document.getElementById('txtCnpj').value;
-        const txtServico1 = document.getElementById('servico1').value;
-        const txtServico2 = document.getElementById('servico2').value || "---";
-        const txtServico3 = document.getElementById('servico3').value || "---";
+        const placaValor = document.getElementById('txtPlaca').value.toUpperCase().trim();
+        const modeloValor = document.getElementById('txtModelo').value.toUpperCase().trim();
+        const filialValor = document.getElementById('txtFilial').value.toUpperCase().trim();
+        const cnpjValor = document.getElementById('txtCnpj').value.trim();
+        const txtServico1 = document.getElementById('servico1').value.toUpperCase().trim();
+        const txtServico2 = document.getElementById('servico2').value ? document.getElementById('servico2').value.toUpperCase().trim() : "---";
+        const txtServico3 = document.getElementById('servico3').value ? document.getElementById('servico3').value.toUpperCase().trim() : "---";
+        const fornecedorValor = document.getElementById('empresaParceira').value.toUpperCase().trim();
 
-        const proximoNumeroOS = bancoOrdensCompleto.length + 1;
+        const urlDestino = osSendoEditada ? URL_ALTERAR : URL_SALVAR;
+        const proximoNumeroOS = osSendoEditada ? osSendoEditada : (bancoOrdensCompleto.length + 1);
+
         document.getElementById('printNumeroOS').innerText = proximoNumeroOS;
-
-        document.getElementById('printDataCidade').innerText = `Cascavel - PR, ${diaStr} de ${mesExtenso} de ${anoStr}.`;
+        document.getElementById('printDataCidade').innerText = `CASCAVEL - PR, ${diaStr} DE ${mesExtenso} DE 2026.`;
         document.getElementById('printData').innerText = dataFormatadaBR;
-        document.getElementById('printFrota').innerText = frotaValor;
-        document.getElementById('printPlaca').innerText = placaValor;
-        document.getElementById('printModelo').innerText = modeloValor;
-        document.getElementById('printFilial').innerText = filialValor;
-        document.getElementById('printCnpj').innerText = cnpjValor;
-        document.getElementById('printOficina').innerText = document.getElementById('empresaParceira').value.toUpperCase();
-        document.getElementById('printServico1').innerText = `1º Serviço: ${txtServico1}`;
-        document.getElementById('printServico2').innerText = txtServico2 !== "---" ? `2º Serviço: ${txtServico2}` : "";
-        document.getElementById('printServico3').innerText = txtServico3 !== "---" ? `3º Serviço: ${txtServico3}` : "";
+        document.getElementById('printFrota').innerText = frotaValor; document.getElementById('printPlaca').innerText = placaValor;
+        document.getElementById('printModelo').innerText = modeloValor; document.getElementById('printFilial').innerText = filialValor;
+        document.getElementById('printCnpj').innerText = cnpjValor; document.getElementById('printOficina').innerText = fornecedorValor;
+        document.getElementById('printServico1').innerText = `1º SERVIÇO: ${txtServico1}`;
+        document.getElementById('printServico2').innerText = txtServico2 !== "---" ? `2º SERVIÇO: ${txtServico2}` : "";
+        document.getElementById('printServico3').innerText = txtServico3 !== "---" ? `3º SERVIÇO: ${txtServico3}` : "";
 
         const payload = { 
             numero_os: proximoNumeroOS,
             dataSolicitacao: dataFormatadaBR, frota: frotaValor, placa: placaValor, modelo: modeloValor, filial: filialValor, cnpj: cnpjValor, 
-            empresaParceira: document.getElementById('empresaParceira').value, servico1: txtServico1, servico2: txtServico2, servico3: txtServico3, 
-            descricao: `1º ${txtServico1} | 2º ${txtServico2} | 3º ${txtServico3}` 
+            empresaParceira: fornecedorValor, servico1: txtServico1, servico2: txtServico2, servico3: txtServico3, 
+            descricao: `1º ${txtServico1} | 2º ${txtServico2} | 3º ${txtServico3}`.toUpperCase()
         };
 
         try {
-            const response = await fetch(URL_SALVAR, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-            });
+            const response = await fetch(urlDestino, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
             if (response.ok) {
-                alert("Ordem de Serviço registrada com sucesso!");
+                alert(osSendoEditada ? "Ordem de Serviço atualizada com sucesso!" : "Ordem de Serviço registrada com sucesso!");
                 window.print();
+                
+                osSendoEditada = null;
+                document.getElementById('btnSalvar').querySelector('span').innerText = "Salvar no Sistema e Imprimir OS";
+
                 document.getElementById('osForm').reset();
                 document.getElementById('dataSolicitacao').valueAsDate = new Date();
                 document.getElementById('txtPlaca').value = ""; document.getElementById('txtModelo').value = "";
                 document.getElementById('txtFilial').value = ""; document.getElementById('txtCnpj').value = "";
                 carregarHistoricoTabela();
             }
-        } catch (error) { alert("Falha ao salvar."); }
+        } catch (error) { alert("Falha ao salvar no sistema."); }
         finally { btnText.innerText = "Salvar no Sistema e Imprimir OS"; btn.disabled = false; }
     });
 </script>
